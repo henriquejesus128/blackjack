@@ -9,11 +9,17 @@
 (defn new-card []
   (inc (rand-int 13)))
 
+(defn points-card [cards]
+  )
+
 (defn player [player-name]
   (let [card-1 (new-card)
-        card-2 (new-card)]
+        card-2 (new-card)
+        cards [card-1 card-2]
+        points (points-card cards)]
   {:player-name player-name
-   :cards [card-1, card-2]}))
+   :cards cards
+   :points points}))
 
 (println (player "Henrique"))
 (println (player "Dealer"))
