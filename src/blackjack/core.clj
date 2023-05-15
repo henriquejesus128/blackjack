@@ -62,10 +62,10 @@
         message (cond
                   (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
                   (= player-points dealer-points) "Empatou!"
-                  (> player-points 21) (str dealer-name "Ganhou!")
-                  (> dealer-points 21) (str player-name "Ganhou!")
-                  (> player-points dealer-points) (str player-name "Ganhou!")
-                  (> dealer-points player-points) (str dealer-name "Ganhou!"))]
+                  (> player-points 21) (str dealer-name " Ganhou!")
+                  (> dealer-points 21) (str player-name " Ganhou!")
+                  (> player-points dealer-points) (str player-name " Ganhou!")
+                  (> dealer-points player-points) (str dealer-name " Ganhou!"))]
     (println player)
     (println dealer)
     (println message)))
