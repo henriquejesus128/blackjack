@@ -78,9 +78,9 @@
       (println "********************************************************************")
       (println (str dealer-name " esta com " @score-dealer " de vitorias"))))
 
-(defn verificar-continuar []
-  (def jogando (atom 1))
-  (while (= @jogando 1)
+(defn continue-game []
+  (def continue (atom 1))
+  (while (= @continue 1)
     (println "Jogando...")
 
     (def player-1 (player "Henrique"))
@@ -93,16 +93,16 @@
     (end-game player-after-game dealer-after-game)
 
     (println "Deseja jogar novamente? (s/n)")
-    (let [resposta (read-line)]
-      (if (= resposta "n")
+    (let [resp (read-line)]
+      (if (= resp "n")
         (do
           (println "Fim do jogo")
-          (reset! jogando  0))
-        (if (= resposta "s")
+          (reset! continue  0))
+        (if (= resp "s")
           (do 
           (println "Continuando..."))
           )))))
 
-(verificar-continuar)
+(continue-game)
 
 
