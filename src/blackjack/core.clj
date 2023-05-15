@@ -1,6 +1,9 @@
 (ns blackjack.core
   (:gen-class))
 
+(def score-player (atom 0))
+(def score-dealer (atom 0))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
@@ -61,16 +64,19 @@
           message (cond
                     (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
                     (= player-points dealer-points) "Empatou!"
-                    (> player-points 21) (str dealer-name " Ganhou!")
-                    (> dealer-points 21) (str player-name " Ganhou!")
-                    (> player-points dealer-points) (str player-name " Ganhou!")
+                    (> player-points 21) (str dealer-name " Ganhou!" (swap! score-dealer inc)) 
+                    (> dealer-points 21) (str player-name " Ganhou!" (swap! score-player inc)) 
+                    (> player-points dealer-points) (str player-name " Ganhou!") 
                     (> dealer-points player-points) (str dealer-name " Ganhou!"))]
       (println player)
       (println "*******************************************************************")
       (println dealer)
       (println "*******************************************************************")
-      (println message)))
+      (println message)
       (println "********************************************************************")
+      (println (str player-name " esta com " @score-player " de vitorias"))
+      (println "********************************************************************")
+      (println (str dealer-name " esta com " @score-dealer " de vitorias"))))
 
 (defn verificar-continuar []
   (def jogando (atom 1))
@@ -98,6 +104,5 @@
           )))))
 
 (verificar-continuar)
-
 
 
