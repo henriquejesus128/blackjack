@@ -46,7 +46,7 @@
   (< dealer-points player-points)))
 
 (defn game [player fn-decision]
-  (println (:player-name player) ":Mais carta ?")
+  (println (:player-name player) "quer mais carta ?")
     (if(fn-decision player)
     (let [player-get-card (get-card player)]
       (println player-get-card)
@@ -59,5 +59,5 @@
 (def dealer (player "Dealer"))
 (println dealer)
 
-(game player-1 player-decision)
-(game dealer (partial dealer-decision (:points player-1)))
+(def player-after-game (game player-1 player-decision))
+(game dealer (partial dealer-decision (:points player-after-game)))
