@@ -57,8 +57,8 @@
 (defn end-game [player dealer]
   (let [player-points (:points player)
         dealer-points (:points dealer)
-        player-name (::player-name player)
-        dealer-name (::player-name dealer)
+        player-name (:player-name player)
+        dealer-name (:player-name dealer)
         message (cond
                   (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
                   (= player-points dealer-points) "Empatou!"
