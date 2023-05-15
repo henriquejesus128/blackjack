@@ -50,7 +50,7 @@
     (if(fn-decision player)
     (let [player-get-card (get-card player)]
       (println player-get-card)
-      (game player-get-card fn-decision))
+      (recur player-get-card fn-decision))
       player))
 
 (def player-1 (player "Henrique"))
