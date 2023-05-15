@@ -39,42 +39,65 @@
     (assoc new-player :points points)))
 
 (defn player-decision [player]
-  (println (:player-name player) "quer mais carta ?")
-  (= (read-line) "sim"))
+  (println (:player-name player) "quer mais carta ? (s/n)")
+  (= (read-line) "s"))
 
 (defn dealer-decision [player-points dealer]
   (let [dealer-points (:points dealer)]
     (if (> player-points 21) false (<= dealer-points player-points))))
 
 (defn game [player fn-decision]
-  (if (fn-decision player)
+  (if (fn-decision player )
     (let [player-get-card (get-card player)]
       (println player-get-card)
       (recur player-get-card fn-decision))
     player))
 
 (defn end-game [player dealer]
-  (let [player-points (:points player)
-        dealer-points (:points dealer)
-        player-name (:player-name player)
-        dealer-name (:player-name dealer)
-        message (cond
-                  (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
-                  (= player-points dealer-points) "Empatou!"
-                  (> player-points 21) (str dealer-name " Ganhou!")
-                  (> dealer-points 21) (str player-name " Ganhou!")
-                  (> player-points dealer-points) (str player-name " Ganhou!")
-                  (> dealer-points player-points) (str dealer-name " Ganhou!"))]
-    (println player)
+    (let [player-points (:points player)
+          dealer-points (:points dealer)
+          player-name (:player-name player)
+          dealer-name (:player-name dealer)
+          message (cond
+                    (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
+                    (= player-points dealer-points) "Empatou!"
+                    (> player-points 21) (str dealer-name " Ganhou!")
+                    (> dealer-points 21) (str player-name " Ganhou!")
+                    (> player-points dealer-points) (str player-name " Ganhou!")
+                    (> dealer-points player-points) (str dealer-name " Ganhou!"))]
+      (println player)
+      (println "*******************************************************************")
+      (println dealer)
+      (println "*******************************************************************")
+      (println message)))
+      (println "********************************************************************")
+
+(defn verificar-continuar []
+  (def jogando (atom 1))
+  (while (= @jogando 1)
+    (println "Jogando...")
+
+    (def player-1 (player "Henrique"))
+    (def dealer (player "Dealer"))
+    (println player-1)
     (println dealer)
-    (println message)))
 
-(def player-1 (player "Henrique"))
-(println player-1)
+    (def player-after-game (game player-1 player-decision))
+    (def dealer-after-game (game dealer (partial dealer-decision (:points player-after-game))))
+    (end-game player-after-game dealer-after-game)
 
-(def dealer (player "Dealer"))
-(println dealer)
+    (println "Deseja jogar novamente? (s/n)")
+    (let [resposta (read-line)]
+      (if (= resposta "n")
+        (do
+          (println "Fim do jogo")
+          (reset! jogando  0))
+        (if (= resposta "s")
+          (do 
+          (println "Continuando..."))
+          )))))
 
-(def player-after-game (game player-1 player-decision))
-(def dealer-after-game (game dealer (partial dealer-decision (:points player-after-game))))
-(end-game player-after-game dealer-after-game)
+(verificar-continuar)
+
+
+
