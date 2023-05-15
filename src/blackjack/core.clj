@@ -47,7 +47,6 @@
     (if (> player-points 21) false (<= dealer-points player-points))))
 
 (defn game [player fn-decision]
-  
   (if (fn-decision player)
     (let [player-get-card (get-card player)]
       (println player-get-card)
