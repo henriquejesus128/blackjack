@@ -43,7 +43,7 @@
 
 (defn dealer-decision [player-points dealer]
   (let [dealer-points (:points dealer)]
-  (< dealer-points player-points)))
+  (<= dealer-points player-points)))
 
 (defn game [player fn-decision]
   (println (:player-name player) "quer mais carta ?")
