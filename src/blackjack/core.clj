@@ -64,8 +64,8 @@
           message (cond
                     (and (> player-points 21) (> dealer-points 21)) "Ambos perderam!"
                     (= player-points dealer-points) "Empatou!"
-                    (> player-points 21) (str dealer-name " Ganhou!" (swap! score-dealer inc)) 
-                    (> dealer-points 21) (str player-name " Ganhou!" (swap! score-player inc)) 
+                    (> player-points 21) (str dealer-name " ganhou " (swap! score-dealer inc) " ponto!")
+                    (> dealer-points 21) (str player-name " ganhou " (swap! score-player inc) " ponto!")  
                     (> player-points dealer-points) (str player-name " Ganhou!") 
                     (> dealer-points player-points) (str dealer-name " Ganhou!"))]
       (println player)
@@ -74,9 +74,7 @@
       (println "*******************************************************************")
       (println message)
       (println "********************************************************************")
-      (println (str player-name " esta com " @score-player " de vitorias"))
-      (println "********************************************************************")
-      (println (str dealer-name " esta com " @score-dealer " de vitorias"))))
+      (println (str player-name " " @score-player " e " dealer-name " " @score-dealer))))
 
 (defn continue-game []
   (def continue (atom 1))
