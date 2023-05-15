@@ -53,15 +53,6 @@
       (recur player-get-card fn-decision))
     player))
 
-(def player-1 (player "Henrique"))
-(println player-1)
-
-(def dealer (player "Dealer"))
-(println dealer)
-
-(def player-after-game (game player-1 player-decision))
-(game dealer (partial dealer-decision (:points player-after-game)))
-
 (defn end-game [player dealer]
   (let [player-points (:points player)
         dealer-points (:points dealer)
@@ -77,3 +68,13 @@
     (println player)
     (println dealer)
     (println message)))
+
+(def player-1 (player "Henrique"))
+(println player-1)
+
+(def dealer (player "Dealer"))
+(println dealer)
+
+(def player-after-game (game player-1 player-decision))
+(def dealer-after-game (game dealer (partial dealer-decision (:points player-after-game))))
+
