@@ -80,8 +80,9 @@
   (def continue (atom 1))
   (while (= @continue 1)
     (println "Jogando...")
+    (println "Qual seu nome ?")
 
-    (def player-1 (player "Henrique"))
+    (def player-1 (player (read-line)))
     (def dealer (player "Dealer"))
     (println player-1)
     (println dealer)
